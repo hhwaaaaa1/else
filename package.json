@@ -1,0 +1,20 @@
+{
+  "name": "else",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://hhwaaaaa1@github.com/hhwaaaaa1/else.git",
+  "author": "hhwaaaaa1 <hhwaaaaa1@naver.com>",
+  "license": "MIT",
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^9.0.0",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-postcss": "^9.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "run-sequence": "^2.2.1"
+  }
+}
