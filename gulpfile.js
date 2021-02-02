@@ -44,7 +44,8 @@ gulp.task("scss:compile", function () {
     .pipe(scss(scssOptions).on("error", scss.logError))
     .pipe(postcss([autoprefixer()]))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(`${dist}/css`));
+    .pipe(gulp.dest(`${dist}/css`))
+    .pipe(browserSync.reload({ stream: true }));
 });
 
 gulp.task("clean", function () {
