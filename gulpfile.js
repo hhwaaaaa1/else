@@ -1,5 +1,6 @@
 const gulp = require("gulp");
 const clean = require("gulp-clean");
+const pug = require("gulp-pug");
 const sourcemaps = require("gulp-sourcemaps");
 const scss = require("gulp-sass");
 const autoprefixer = require("autoprefixer");
@@ -8,6 +9,7 @@ const postcss = require("gulp-postcss");
 const src = "./src";
 const dist = "./dist";
 const paths = {
+  pug: src + "/views/**/*.pug",
   scss: src + "/styles/**/*.scss",
 };
 
@@ -16,15 +18,27 @@ gulp.task("clean", function () {
 });
 
 /**
+ * Pug:compile
+ */
+const pugOptions = {
+  pretty: true,
+};
+gulp.task("pug:compile", function () {
+  return gulp
+    .src(paths.pug)
+    .pipe(pug(pugOptions))
+    .pipe(gulp.dest(dist + "/html"));
+});
+
+/**
  * SCSS:compile
  */
-var scssOptions = {
+const scssOptions = {
   outputStyle: "expanded",
   indentType: "tab",
   indentWidth: 1,
   precision: 6,
 };
-
 gulp.task("scss:compile", function () {
   return gulp
     .src(paths.scss)
@@ -35,4 +49,4 @@ gulp.task("scss:compile", function () {
     .pipe(gulp.dest(dist + "/css"));
 });
 
-gulp.task("default", gulp.series(["clean", "scss:compile"]));
+gulp.task("default", gulp.series(["clean", "pug:compile", "scss:compile"]));
