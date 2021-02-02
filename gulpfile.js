@@ -60,8 +60,13 @@ gulp.task("server", function () {
     tunnel: true,
   });
 
-  gulp.watch(paths.pug, gulp.series(["clean", "pug:compile"]));
-  gulp.watch(paths.scss, gulp.series(["clean", "scss:compile"]));
+  gulp.watch(paths.pug, gulp.series(["pug:compile"]));
+  gulp.watch(paths.scss, gulp.series(["scss:compile"]));
 });
 
-gulp.task("default", gulp.series(["server"]));
+gulp.task(
+  "build",
+  gulp.series(["clean", gulp.parallel(["pug:compile", "scss:compile"])])
+);
+
+gulp.task("default", gulp.series(["build", "server"]));
