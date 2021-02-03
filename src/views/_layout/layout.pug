@@ -1,0 +1,10 @@
+doctype html
+block variables
+html
+  head
+    title= title
+    meta(charset='utf-8')
+    each style in styles
+      link(rel="stylesheet", href=`${style}.css`)
+  body
+    block content

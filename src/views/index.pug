@@ -1,6 +1,8 @@
-doctype html
-html
-  head
-    title index
-  body
-    div test test ?
+extends ./_layout/layout
+
+block variables
+  - var title = 'INDEX'
+  - var styles = ['/styles/test', '/styles/test2']
+
+block content
+  div test..

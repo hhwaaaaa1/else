@@ -10,7 +10,7 @@ const browserSync = require("browser-sync").create();
 const src = "./src";
 const dist = "./dist";
 const paths = {
-  pug: `${src}/views/**/*.pug`,
+  pug: [`${src}/views/**/*.pug`, `!${src}/views/**/_*/*.pug`],
   scss: `${src}/styles/**/*.scss`,
 };
 
@@ -24,7 +24,7 @@ gulp.task("pug:compile", function () {
   return gulp
     .src(paths.pug)
     .pipe(pug(pugOptions))
-    .pipe(gulp.dest(`${dist}/html`))
+    .pipe(gulp.dest(`${dist}/views`))
     .pipe(browserSync.reload({ stream: true }));
 });
 
@@ -44,7 +44,7 @@ gulp.task("scss:compile", function () {
     .pipe(scss(scssOptions).on("error", scss.logError))
     .pipe(postcss([autoprefixer()]))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(`${dist}/css`))
+    .pipe(gulp.dest(`${dist}/styles`))
     .pipe(browserSync.reload({ stream: true }));
 });
 
@@ -54,7 +54,7 @@ gulp.task("clean", function () {
 
 gulp.task("server", function () {
   browserSync.init({
-    server: `${dist}/html`,
+    server: `${dist}`,
     directory: true,
     port: 3001,
     open: true,
